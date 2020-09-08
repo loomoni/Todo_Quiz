@@ -1,0 +1,69 @@
+<div class="pt-4">
+    <div class="card m-2">
+      <h2 class="text-right pr-5">TOTAL LIST OF ADDED TODOs</h2>
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Type</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Updated Date</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let todo of todos | async | paginate: { itemsPerPage: 4, currentPage: p }">
+            <td>{{ todo.todoType }}</td>
+            <td>{{ todo.todoName }}</td>
+            <td>{{ todo.todoDescription }}</td>
+            <td>{{ todo.updatedAt }}</td>
+            <td>
+              
+              <button (click)="deleteTodo(todo.id)" class="btn btn-danger" style="margin: 4px">Delete</button>
+              <button (click)="showUpdateForm(todo)" class="btn btn-primary" style="margin: 4px">Edit</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="bg-white">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+  
+    <div *ngIf="isUpdateActivated" class="mt-5 mb-5 pl-5 pr-5">
+      <div fxLayout="row wrap" fxLayoutAlign="center center" class="row-height" >
+        <mat-card fxFlex="45%" fxFlex.md="65%" fxFlex.sm="90%" fxFlex.xs="100%" class="login-form">
+            <mat-card-title class="text-center p-4">
+              <div class="text-center">DHIS2 TODOS APPLICATION</div></mat-card-title>
+    
+            <mat-card-content fxLayout="column">
+      <form (ngSubmit)="updateTodo(updateForm)" #updateForm="ngForm">
+
+        <div class="d-flex">
+          <mat-form-field class="w-100">
+            <mat-label>Type</mat-label>
+            <input type="text" id="todoType" name="todoType" [(ngModel)]="todoToBeUpdated.todoType" matInput>
+          </mat-form-field>
+        </div>
+  
+        <div class="d-flex">
+          <mat-form-field class="w-100">
+            <mat-label>Name</mat-label>
+            <input type="text" id="todoName" name="todoName"  [(ngModel)]="todoToBeUpdated.todoName" matInput>
+          </mat-form-field>
+        </div>
+          
+        <div class="d-flex">
+          <mat-form-field class="w-100">
+            <mat-label>Description</mat-label>
+            <input type="text" id="todoDescription" name="todoDescription" [(ngModel)]="todoToBeUpdated.todoDescription" matInput>
+          </mat-form-field>
+        </div>
+  
+        <button [disabled]="updateForm.invalid" class="btn btn-primary" type="submit">Update</button>
+      </form> 
+               
+    </mat-card-content>
+  </mat-card>
+  </div>
+  </div>

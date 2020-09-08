@@ -1,0 +1,41 @@
+
+<mat-toolbar class="dhsi2-toolbar bg-dark-blue text-green">
+    <button mat-icon-button (click)="isExpanded = !isExpanded"><mat-icon>menu</mat-icon></button>
+    
+    <h1 class="p-3 m-3">WELCOME DHSI2</h1>
+     
+  
+  </mat-toolbar>
+  
+  <mat-sidenav-container class="dhsi2-container" autosize colour="blue">
+      <mat-sidenav #sidenav class="dhsi2-sidenav" mode="side" opened="true"
+       (mouseenter)="mouseEnter()" (mouseleave)="mouseLeave()">
+  
+          <mat-nav-list style="max-width: 300px;">
+              <mat-list-item>
+                  <mat-icon mat-list-icon>home</mat-icon>
+                  <a routerLink="" class="full-width pl-2 pr-5" *ngIf="isExpanded || isShowing">Home</a>
+              </mat-list-item>
+  
+          <mat-list-item>
+                 <mat-icon mat-list-icon>list</mat-icon>
+              <a routerLink="todos/list" class="full-width pl-2 pr-5" *ngIf="isExpanded || isShowing">Todo List</a>
+          </mat-list-item>
+  
+          <mat-list-item>
+              <mat-icon mat-list-icon>add</mat-icon>
+              <a routerLink="todos/add" class="full-width pl-2 pr-5" *ngIf="isExpanded || isShowing">Add Todo</a>
+              
+          </mat-list-item>
+  
+         
+  
+          </mat-nav-list>
+      </mat-sidenav>
+  
+      <div>
+          <router-outlet></router-outlet>
+      </div>
+  
+  </mat-sidenav-container>
+  
